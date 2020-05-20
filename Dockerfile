@@ -1,9 +1,8 @@
 FROM node:alpine
 RUN apk update && apk upgrade
-RUN apk add --update --no-cache git
-RUN apk add --update --no-cache python3
-RUN apk add --update --no-cache make
-RUN apk add --update --no-cache openssh
+RUN apk add --update --no-cache git python3 build-base
+#RUN apk add --update --no-cache make
+#RUN apk add --update --no-cache openssh
 WORKDIR /data
 RUN git clone https://github.com/BlueWallet/LndHub.git /data/app
 WORKDIR /data/app
