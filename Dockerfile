@@ -1,6 +1,7 @@
 FROM node:alpine
 RUN apk update
 RUN apk add --update --no-cache git
+RUN apk add --update --no-cache python3
 RUN apk add --update --no-cache openssh
 WORKDIR /data
 RUN git clone https://github.com/BlueWallet/LndHub.git /data/app
@@ -11,14 +12,14 @@ WORKDIR /data/app
 # where available (npm@5+)
 #COPY package*.json ./
 
-RUN npm i
+RUN npm install
 # If you are building your code for production
 # RUN npm ci --only=production
 
 # Bundle app source (uncomment if needed in image)
 #COPY . .
 
-EXPOSE 8080
+#EXPOSE 8080
 EXPOSE 3000
 CMD [ "node", "server.js" ]
 
