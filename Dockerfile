@@ -1,5 +1,6 @@
 FROM node:alpine
-RUN apk update && apk upgrade
+RUN apk update
+RUN apk upgrade
 RUN apk add --update --no-cache git python3 build-base
 WORKDIR /git
 RUN git clone https://github.com/BlueWallet/LndHub.git /git/lndhub
