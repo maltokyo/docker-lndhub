@@ -1,4 +1,4 @@
-FROM node:14-buster
+FROM node:buster
 
 RUN groupadd -r lndhubuser -g 1001 && useradd -d /home/lndhubuser -u 1001 -r -g lndhubuser lndhubuser
 
