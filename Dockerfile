@@ -5,8 +5,7 @@ RUN addgroup --system -g 1001 lndhubuser && adduser --home /home/lndhubuser --ui
 
 RUN apk update
 RUN apk upgrade
-RUN apk add --update --no-cache git python3 build-base
-RUN pip3 install pkg-config
+RUN apk add --update --no-cache git python3 build-base pkgconfig
 RUN pip3 install secp256k1
 WORKDIR /git
 RUN git clone https://github.com/BlueWallet/LndHub.git /git/lndhub
