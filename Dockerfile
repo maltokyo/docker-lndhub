@@ -1,6 +1,6 @@
 FROM node:alpine
 
-RUN groupadd -r lndhubuser -g 1001 && useradd -d /home/lndhubuser -u 1001 -r -g lndhubuser lndhubuser
+RUN addgroup --system -g 1001 lndhubuser && adduser --home /home/lndhubuser --uid 1001 --system --ingroup lndhubuser lndhubuser
 RUN mkdir /home/lndhubuser/ && chown -R 1001:1001 /home/lndhubuser/
 
 
