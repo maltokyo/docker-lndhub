@@ -5,8 +5,8 @@ RUN addgroup --system -g 1001 lndhubuser && adduser --home /home/lndhubuser --ui
 
 RUN apk update
 RUN apk upgrade
-RUN apk add --update --no-cache git python3 build-base pkgconfig libffi
-ENV PKG_CONFIG_PATH=/usr/local/lib:$PKG_CONFIG_PATH
+RUN apk add --update --no-cache git python3 build-base pkgconfig libffi libffi-dev
+#ENV PKG_CONFIG_PATH=/usr/local/lib:$PKG_CONFIG_PATH
 RUN pip3 install secp256k1
 WORKDIR /git
 RUN git clone https://github.com/BlueWallet/LndHub.git /git/lndhub
