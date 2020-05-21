@@ -8,6 +8,10 @@ RUN git clone https://github.com/BlueWallet/LndHub.git /lndhub
 
 WORKDIR /lndhub
 
+RUN npm install -g express
+
+RUN npm install --save helmet
+
 RUN npm i
 
 RUN mkdir /lndhub/logs && chown -R 1001:1001 /lndhub/
