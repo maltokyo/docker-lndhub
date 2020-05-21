@@ -1,7 +1,6 @@
 FROM node:alpine
 
-RUN addgroup --system -g 1001 lndhubuser && adduser --home /home/lndhubuser --uid 1001 --system --ingroup lndhubuser lndhubuser
-RUN mkdir /home/lndhubuser/ && chown -R 1001:1001 /home/lndhubuser/
+RUN addgroup --system -g 1001 lndhubuser && adduser --home /home/lndhubuser --uid 1001 --system --ingroup lndhubuser lndhubuser && chown -R 1001:1001 /home/lndhubuser/
 
 
 RUN apk update
