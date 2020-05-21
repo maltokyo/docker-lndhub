@@ -1,4 +1,9 @@
 FROM node:alpine
+
+RUN groupadd -r lndhubuser -g 1001 && useradd -d /home/lndhubuser -u 1001 -r -g lndhubuser lndhubuser
+RUN mkdir /home/lndhubuser/ && chown -R 1001:1001 /home/lndhubuser/
+
+
 RUN apk update
 RUN apk upgrade
 RUN apk add --update --no-cache git python3 build-base
@@ -11,15 +16,17 @@ WORKDIR /git/lndhub
 # where available (npm@5+)
 #COPY package*.json ./
 
-RUN npm install
+RUN npm i
 
 # If you are building your code for production
 # RUN npm ci --only=production
 
-# Bundle app source (uncomment if needed in image)
-#COPY . .
+RUN mkdir /git/lndhub/logs && chown -R 1001:1001 /git/lndhub/
 
-#EXPOSE 8080
+USER lndhubuser
+
+
 EXPOSE 3000
+
 CMD [ "node", "index.js" ]
 
