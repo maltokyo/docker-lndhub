@@ -7,6 +7,7 @@ RUN apk update
 RUN apk upgrade
 RUN apk add --update --no-cache git python3 python3-dev build-base pkgconfig libffi-dev autoreconf
 ENV PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+RUN pip3 install --upgrade pip
 RUN pip3 install secp256k1
 WORKDIR /git
 RUN git clone https://github.com/BlueWallet/LndHub.git /git/lndhub
