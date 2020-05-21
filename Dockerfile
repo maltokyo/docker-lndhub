@@ -1,38 +1,25 @@
-FROM node:alpine
+FROM node:10-buster
 
-RUN addgroup --system -g 1001 lndhubuser && adduser --home /home/lndhubuser --uid 1001 --system --ingroup lndhubuser lndhubuser && chown -R 1001:1001 /home/lndhubuser/
+RUN groupadd -r lndhubuser -g 1001 && useradd -d /home/lndhubuser -u 1001 -r -g lndhubuser lndhubuser
 
+RUN mkdir /home/lndhubuser/ && chown -R 1001:1001 /home/lndhubuser/
+RUN apt-get update && apt-get upgrade && apt-get install git --no-cache
+RUN git clone https://github.com/BlueWallet/LndHub.git /lndhub
+#COPY LndHub/ /lndhub/
 
-RUN apk update
-RUN apk upgrade
-RUN apk add --update --no-cache git python3 python3-dev build-base pkgconfig libffi-dev autoconf automake
-ENV PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
-RUN pip3 install --upgrade pip
-RUN pip3 install secp256k1
-WORKDIR /git
-RUN git clone https://github.com/BlueWallet/LndHub.git /git/lndhub
-WORKDIR /git/lndhub
+WORKDIR /lndhub/
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-#COPY package*.json ./
+RUN npm install -g express
 
-#RUN npm install -g express
-
-#RUN npm install --save helmet
+RUN npm install --save helmet
 
 RUN npm i
 
-# If you are building your code for production
-# RUN npm ci --only=production
-
-RUN mkdir /git/lndhub/logs && chown -R 1001:1001 /git/lndhub/
+RUN mkdir /lndhub/logs && chown -R 1001:1001 /lndhub/
 
 USER lndhubuser
 
-
 EXPOSE 3000
 
-CMD [ "node", "index.js" ]
-
+# Define default command
+CMD /lndhub/node_modules/.bin/babel-node index.js
