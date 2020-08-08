@@ -14,6 +14,9 @@ RUN mkdir /lndhub/logs && chown -R 1001:1001 /lndhub/
 
 USER lndhubuser
 
+
+# VOLUME /lndhub  # is this needed?
+
 EXPOSE 3000
 
 CMD /lndhub/node_modules/.bin/babel-node index.js
